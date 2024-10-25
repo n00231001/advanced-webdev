@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\guitar;
+use App\Models\Guitar;
 use Illuminate\Http\Request;
 
 class GuitarController extends Controller
@@ -12,7 +12,7 @@ class GuitarController extends Controller
      */
     public function index()
     {
-        $guitars = guitar::all();
+        $guitars = Guitar::all();
         return view('guitars.index', compact('guitars'));
 
     }
@@ -36,15 +36,15 @@ class GuitarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(guitar $guitar)
+    public function show(Guitar $guitar)
     {
-        //
+        return view('guitar.show')->with('guitar', $guitar);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(guitar $guitar)
+    public function edit(Guitar $guitar)
     {
         //
     }
@@ -52,7 +52,7 @@ class GuitarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, guitar $guitar)
+    public function update(Request $request, Guitar $guitar)
     {
         //
     }
@@ -60,7 +60,7 @@ class GuitarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(guitar $guitar)
+    public function destroy(Guitar $guitar)
     {
         //
     }
