@@ -22,7 +22,7 @@ class GuitarController extends Controller
      */
     public function create()
     {
-        return view('guitar.create');
+        return view('guitars.create');
     }
 
     /**

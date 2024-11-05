@@ -21,6 +21,12 @@
                     </x-nav-link>
 
 
+
+                    <x-nav-link :href="route('guitars.create')" :active="request()->routeIs('guitars.create')">
+                        {{ __('Create New Guitar') }}
+                    </x-nav-link>
+
+
                 </div>
             </div>
 

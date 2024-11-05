@@ -30,5 +30,6 @@
     <div>
     <x-primary-button>
         {{isset($guitar) ? 'updated guitar' : 'add guitar' }}
+    </x-primary-button>
     </div>
 </form>
