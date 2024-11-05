@@ -31,8 +31,7 @@ class GuitarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'type' => 'required|max:500',
+            'type' => 'required',
             'brand' => 'required',
             'price' => 'required|integer'
         ]);
@@ -40,14 +39,14 @@ class GuitarController extends Controller
         if ($request->hasFile('image')) {
 
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images/guitar'), $imageName);
+            $request->image->move(public_path('image/guitar'), $imageName);
         }
 
         Guitar::create([
-            'name' => $request->title,
             'type' => $request->type,
             'brand' => $request->brand,
             'price' => $request->price,
+            'image' => $imageName,
             'created_at' => now(),
             'updated_at' => now()
         ]);

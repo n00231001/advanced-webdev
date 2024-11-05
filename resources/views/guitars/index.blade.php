@@ -1,3 +1,12 @@
+{{-- @foreach($guitars as $guitar)
+<a href=" {{ route('guitars.show', $guitar) }}">
+    <x-guitar-card
+        :name="$guitar->name"
+        :image="$guitar->image"
+    />
+</a>
+@endforeach --}}
+
 
     <x-app-layout>
         <x-slot name="header">
@@ -18,12 +27,15 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($guitars as $guitar)
 
+                        <a href=" {{ route('guitars.show', $guitar) }}">
                             <x-guitar-card
                             :type="$guitar->type"
                             :colour="$guitar->colour"
                             :price="$guitar->price"
                             :brand="$guitar->brand"
-                        />
+                            :image="$guitar->image"
+                            />
+                        </a>
                         @endforeach
                     </div>
                 </div>
