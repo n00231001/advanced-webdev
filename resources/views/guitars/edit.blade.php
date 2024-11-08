@@ -11,11 +11,11 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg mb-4">Edit new guitar:</h3>
 
-                    <x-guitar-form
+                    {{-- <x-guitar-form
                         :action="route('guitars.update', $guitar)"
                         :method="'PUT'"
                         :guitar="$guitar"
-                    />
+                    /> --}}
                 </div>
             </div>
         </div>

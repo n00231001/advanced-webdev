@@ -14,6 +14,7 @@ class Guitar extends Model
         'type',
         'colour',
         'brand',
-        'price'
+        'price',
+        'image'
     ];
 }
