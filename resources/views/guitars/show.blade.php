@@ -12,10 +12,9 @@
                     <h3 class="font-semibold text-lg mb-4">Guitar Details</h3>
                     <x-guitar-details
                      :image="$guitar->image"
-                     :name="$guitar->name"
+                     :brand="$guitar->brand"
                      :type="$guitar->type"
                      :colour="$guitar->colour"
-                     :brand="$guitar->brand"
                      />
                 </div>
             </div>

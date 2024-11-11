@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/guitars/{guitar}', [GuitarController::class, 'show'])->name('guitars.show');
     Route::post('/guitars', [GuitarController::class, 'store'])->name('guitars.store');
     Route::get('/guitars/{guitar}/edit', [GuitarController::class, 'edit'])->name('guitars.edit');
-    //Route::get('/guitars/{guitar}', [GuitarController::class, 'update'])->name('guitars.update');
+    Route::put('/guitars/{guitar}', [GuitarController::class, 'update'])->name('guitars.update');
     Route::get('/guitars/{guitar}', [GuitarController::class, 'show'])->name('guitars.show');
 
     Route::delete('/guitars/{guitar}', [GuitarController::class, 'destroy'])->name('guitars.destroy');

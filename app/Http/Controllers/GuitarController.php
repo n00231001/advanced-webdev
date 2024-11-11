@@ -36,7 +36,6 @@ class GuitarController extends Controller
             'colour' => 'required',
             'brand' => 'required',
             'price' => 'required',
-            'name' => 'required',
             'image' => 'required|image'
         ]);
 
@@ -82,32 +81,31 @@ class GuitarController extends Controller
      */
     public function update(Request $request, Guitar $guitar)
     {
-        //     $request->validate([
-        //     'type' => 'required',
-        //     'colour' => 'required',
-        //     'brand' => 'required',
-        //     'price' => 'required',
-        //     'name' => 'required',
-        //     'image' => 'required|image'
-        // ]);
+            $request->validate([
+            'type' => 'required',
+            'colour' => 'required',
+            'brand' => 'required',
+            'price' => 'required',
+            'image' => 'required|image'
+        ]);
 
-        // $data = $request->only(['name', 'price', 'colour', 'brand','image']);
+        $data = $request->only(['price', 'colour', 'brand','image']);
 
-        // // Check if a new image file is provided
-        // if ($request->hasFile('image')) {
-        //     // If there's an old image, delete it from the server
-        //     if ($item->image && file_exists(public_path($guitar->image))) {
-        //         unlink(public_path($guitar->image));
-        //     }
+        // Check if a new image file is provided
+        if ($request->hasFile('image')) {
+            // If there's an old image, delete it from the server
+            if ($guitar->image && file_exists(public_path($guitar->image))) {
+                unlink(public_path($guitar->image));
+            }
 
-        //     // Store the new image and add its filename to the data array
-        //     $image = time() . '.' . $request->file('image')->extension();
-        //     $request->file('image')->move(public_path('images/guitar'), $image);
-        //     $data['image'] = $image;
-        // }
+            // Store the new image and add its filename to the data array
+            $image = time() . '.' . $request->file('image')->extension();
+            $request->file('image')->move(public_path('images/guitar'), $image);
+            $data['image'] = $image;
+        }
 
-        // $item->update($data);
-        // return redirect()->route('guitar.index')->with('success', 'Item updated successfully');
+        $guitar->update($data);
+        return redirect()->route('guitars.index')->with('success', 'Item updated successfully');
     }
 
     /**
@@ -115,9 +113,10 @@ class GuitarController extends Controller
      */
     public function destroy(Guitar $guitar)
     {
+
         $guitar->delete();
 
-        return to_route('guitar.index')->with('success', 'Item deleted successfully!');
+        return to_route('guitars.index')->with('success', 'Item deleted successfully!');
 
         // if($deleted){
         //     return to_route('items.index')->with('success', 'Item deleted successfully!');
