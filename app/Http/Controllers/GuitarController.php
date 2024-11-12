@@ -23,6 +23,9 @@ class GuitarController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('guitars.index')->with('error', 'access denied');
+        }
         return view('guitars.create');
     }
 
@@ -73,6 +76,10 @@ class GuitarController extends Controller
     public function edit(Guitar $guitar)
     {
         return view('guitars.edit')->with('guitar', $guitar);
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('guitars.index')->with('error', 'access denied');
+        }
+        return view('guitars.edit');
 
     }
 

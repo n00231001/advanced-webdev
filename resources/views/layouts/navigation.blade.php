@@ -10,6 +10,12 @@
                     </a>
                 </div>
 
+                <?php
+                    // echo $auth()->user()->role;
+                    echo Auth::user()->role
+
+                ?>
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -20,11 +26,11 @@
                         {{ __('View All Guitars') }}
                     </x-nav-link>
 
-
-
-                    <x-nav-link :href="route('guitars.create')" :active="request()->routeIs('guitars.create')">
-                        {{ __('Create New Guitar') }}
-                    </x-nav-link>
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('guitars.create')" :active="request()->routeIs('guitars.create')">
+                            {{ __('Create New Guitar') }}
+                        </x-nav-link>
+                    @endif
 
 
                 </div>

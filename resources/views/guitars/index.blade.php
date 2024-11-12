@@ -28,6 +28,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                         @foreach ($guitars as $guitar)
+
                         <div>
                             <a href=" {{ route('guitars.show', $guitar) }}">
                                 <x-guitar-card :type="$guitar->type" :colour="$guitar->colour" :price="$guitar->price" :brand="$guitar->brand"
