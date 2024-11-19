@@ -17,4 +17,9 @@ class Guitar extends Model
         'price',
         'image'
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

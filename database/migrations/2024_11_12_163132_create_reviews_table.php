@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('rating')->unsigned()->default(1);
             $table->text('comment')->nullable();
-            $table->timestamp();
+            $table->timestamps();
         });
     }
 

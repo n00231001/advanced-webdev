@@ -32,7 +32,7 @@ class GuitarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, guitar $guitar)
     {
         $request->validate([
             'type' => 'required',
@@ -67,7 +67,8 @@ class GuitarController extends Controller
      */
     public function show(Guitar $guitar)
     {
-        return view('guitars.show')->with('guitar', $guitar);
+        $guitar->load('reviews.user');
+        return view('guitars.show', compact('guitar'));
     }
 
     /**

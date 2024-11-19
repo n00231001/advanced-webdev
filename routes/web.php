@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuitarController;
@@ -29,11 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/guitars', [GuitarController::class, 'store'])->name('guitars.store');
     Route::get('/guitars/{guitar}', [GuitarController::class, 'show'])->name('guitars.show');
     Route::put('/guitars/{guitar}', [GuitarController::class, 'update'])->name('guitars.update');*/
+    Route::resource('reviews', ReviewController::class);
 
-
-
-
-
+    Route::post('guitars/{guitar}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::post('guitars/{guitar}/reviews/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 });
 
 require __DIR__.'/auth.php';

@@ -16,9 +16,8 @@ class GuitarSeeder extends Seeder
     {
         $currentTimeStamp = Carbon::now();
             Guitar::insert([
-                ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp , 'created_at' => $currentTimeStamp, 'image' = '0145213515-1.JPEG'],
+                ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp , 'created_at' => $currentTimeStamp],
                 ['type' => 'telecaster', 'colour' => 'blue', 'price' => 600, 'brand' => 'fender',  'updated_at' => $currentTimeStamp, 'created_at' => $currentTimeStamp],
                 ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp, 'created_at' => $currentTimeStamp]]
             );
     }
-}
