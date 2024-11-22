@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slots name="header">
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {[__('edit review') ]}
+            {{__('Edit review') }}
         </h2>
-    </x-slots>
+    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

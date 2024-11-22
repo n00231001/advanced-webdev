@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('reviews', ReviewController::class);
 
     Route::post('guitars/{guitar}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-    Route::post('guitars/{guitar}/reviews/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    //Route::post('guitars/{guitar}/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    //Route::post('guitars/{guitar}/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 });
 
 require __DIR__.'/auth.php';
