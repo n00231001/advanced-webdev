@@ -28,6 +28,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request, guitar $guitar)
     {
+        //dd( $guitar->id);
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string|max:100',
@@ -39,6 +40,9 @@ class ReviewController extends Controller
             'comment' => $request->input('comment'),
             'guitar_id' => $guitar->id
         ]);
+
+
+        return redirect()->route('guitars.show', $guitar)->with('success', 'Review added successfully');
     }
 
     /**
@@ -79,6 +83,16 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+            // Check if the user is the owner of the review or an admin
+            if (auth()->user()->id !== $review->user_id && auth()->user()->role !== 'admin') {
+                return redirect()->route('guitars.index')->with('error', 'Access denied.');
+            }
+
+            // Delete the review
+            $review->delete();
+
+            // Redirect to the item page with a success message
+            return redirect()->route('guitars.index', $review->id)
+                             ->with('success', 'Review deleted successfully.');
     }
 }

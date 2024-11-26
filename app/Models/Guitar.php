@@ -22,4 +22,9 @@ class Guitar extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class);
+    }
 }
