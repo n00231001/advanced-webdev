@@ -12,7 +12,8 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artist::with('guitars')->get();
+        return view('artists.index', compact('artists'));
     }
 
     /**
@@ -20,7 +21,12 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('artists.index')->with('error', 'Access denied');
+        }
+
+        $artists = Guitar::all();
+        return view('artists.create', compact('guitars'));
     }
 
     /**
@@ -28,7 +34,21 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('artists.index')->with('error', 'Access denied');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string|max:1000',
+            'guitars' => 'array',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $authors->guitars()->attach($request->guitars);
+        }
+        return redirect()->route('artists.index')->with('success', 'Artist created successfully');
     }
 
     /**
@@ -36,7 +56,8 @@ class ArtistController extends Controller
      */
     public function show(Artist $Artist)
     {
-        //
+        $artist->load('guitars');
+        return (view('artists.show', compact('artist')));
     }
 
     /**
@@ -44,7 +65,9 @@ class ArtistController extends Controller
      */
     public function edit(Artist $Artist)
     {
-        //
+        $guitars = Guitars::all();
+        $artistsGuitars = $artist->guitars->pluck('id')->toArray();
+        return view('artists.edit', compact('artist', 'guitars', 'artistsGuitars'));
     }
 
     /**
@@ -52,7 +75,20 @@ class ArtistController extends Controller
      */
     public function update(Request $request, Artist $Artist)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string|max:1000',
+            'guitars' => 'array',
+        ]);
+
+        $artis->update($validated);
+
+        if($request->has('guitars')) {
+            $artist->guitars()->sync($request->guitars);
+        }
+
+        return redirect()->route('artists.index')->with('success', 'artist updated successfully');
     }
 
     /**
@@ -60,6 +96,9 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $Artist)
     {
-        //
+        $artist->guitars()->detach();
+        $artist->delete();
+
+        return redirect()->route('artists.index')->with('success', 'artists deleted successfully');
     }
 }

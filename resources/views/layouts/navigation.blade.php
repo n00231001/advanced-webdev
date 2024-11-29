@@ -32,6 +32,14 @@
                         </x-nav-link>
                     @endif
 
+                    <x-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.index')">
+                        {{ __('View all Artists') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('artists.create')" :active="request()->routeIs('artists.create')">
+                        {{ __('artists create') }}
+                    </x-nav-link>
+
 
                 </div>
             </div>

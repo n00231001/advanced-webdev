@@ -36,6 +36,12 @@ Route::middleware('auth')->group(function () {
     //Route::post('guitars/{guitar}/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 
     Route::resource('Artist', ArtistController::class)->middleware('auth');
+    Route::get('/artists', [ArtistController::class, 'index'])->name('artists.index');
+    Route::put('/artits/{artist}', [ArtistController::class, 'update'])->name('artist.update');
+    Route::get('/artists/create', [ArtistController::class, 'create'])->name('artists.create');
+    Route::get('/artists/{artist}', [GuitarController::class, 'show'])->name('artists.show');
+    Route::get('/artists/{artist}/edit', [GuitarController::class, 'edit'])->name('artists.edit');
+    Route::delete('/artists/{artist}', [GuitarController::class, 'destroy'])->name('artists.destroy');
 });
 
 require __DIR__.'/auth.php';
