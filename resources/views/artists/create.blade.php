@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg mb-4">Add new artist:</h3>
 
-                    <x-guitar-form
+                    <x-artist-form
                         :action="route('artists.store')"
                         :method="'POST'"
                     />

@@ -14,4 +14,6 @@ class Artist extends Model
     {
         return $this->belongsToMany(guitar::class);
     }
+
+
 }

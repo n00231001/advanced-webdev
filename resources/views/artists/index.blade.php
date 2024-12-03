@@ -27,22 +27,22 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                        @foreach ($artists as $guitar)
+                        @foreach ($artists as $artist)
 
                         <div>
-                            <a href=" {{ route('artists.show', $guitar) }}">
-                                <x-guitar-card :type="$guitar->type" :colour="$guitar->colour" :price="$guitar->price" :brand="$guitar->brand"
-                                    :image="$guitar->image" />
+                            <a href=" {{ route('artists.show', $artist) }}">
+                                <x-artist-card :name="$artist->name" :description="$artist->description" :image="$artist->$image"
+                                    :image="$artist->image" />
                             </a>
 
                             <div class="mt-4 flex space-x-2">
-                                <a href="{{ route('artists.edit', $guitar) }}"
+                                <a href="{{ route('artists.edit', $artist) }}"
                                     class="text-gray-600 bg-orange-300 hover:bg-orange-700 font-bold py-2 px-4 rounded">
                                     EDIT
                                 </a>
 
 
-                                <form action="{{ route('artists.destroy', $guitar) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item');">
+                                <form action="{{ route('artists.destroy', $artist) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-gray-600 font-bold py-2 px-4 rounded">
