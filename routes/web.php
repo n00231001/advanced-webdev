@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('Artist', ArtistController::class)->middleware('auth');
     Route::post('artists/artist', [ArtistController::class, 'store'])->name('artists.store');
     Route::get('/artists', [ArtistController::class, 'index'])->name('artists.index');
-    Route::put('/artits/{artist}', [ArtistController::class, 'update'])->name('artist.update');
+    Route::put('/artists/{artist}', [ArtistController::class, 'update'])->name('artists.update');
     Route::get('/artists/create', [ArtistController::class, 'create'])->name('artists.create');
     Route::get('/artists/{artist}', [ArtistController::class, 'show'])->name('artists.show');
     Route::get('/artists/{artist}/edit', [ArtistController::class, 'edit'])->name('artists.edit');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\Guitar;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -25,8 +26,8 @@ class ArtistController extends Controller
             return redirect()->route('guitars.index')->with('error', 'Access denied');
         }
 
-        $artists = Artist::all();
-        return view('artists.create', compact('artists'));
+        $guitars = Guitar::all();
+        return view('artists.create', compact('guitars'));
     }
 
     /**
@@ -46,8 +47,8 @@ class ArtistController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $image = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images/artists'),$image);
+            $image = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/artists'), $image);
             $validated['image'] = $image;
         }
 
@@ -71,10 +72,15 @@ class ArtistController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Artist $Artist)
+    public function edit(Artist $artist)
     {
-        $guitars = Guitars::all();
-        $artistsGuitars = $artists->guitars->pluck('id')->toArray();
+        $guitars = Guitar::all();
+        $artistsGuitars = $artist->guitars->pluck('id')->toArray();
+
+        foreach($artistsGuitars as $guitar){
+            echo $guitar;
+        }
+
         return view('artists.edit', compact('artist', 'guitars', 'artistsGuitars'));
     }
 
@@ -84,17 +90,24 @@ class ArtistController extends Controller
     public function update(Request $request, Artist $artist)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|max:2048',
-            'description' => 'nullable|string|max:1000',
-            'guitars' => 'array',
-        ]);
+             'name' => 'required|string|max:255',
+             'image' => 'nullable|image|max:2048',
+             'description' => 'nullable|string|max:1000',
+             'guitars' => 'array',
+         ]);
 
-        $artists->update($validated);
+         $artist->update($validated);
 
-        if($request->has('guitars')) {
-            $artists->guitars()->sync($request->guitars);
-        }
+        //  if ($request->has('guitars')) {
+        //      $artist->guitars()->sync($request->guitars);
+        //  }
+
+        # Might get eg fender stratocaster twice, drop duplicates
+        $guitars = array_unique($request->get('guitars'));
+
+        $artist->guitars()->sync($guitars);
+
+
 
         return redirect()->route('artists.index')->with('success', 'artist updated successfully');
     }
@@ -104,8 +117,8 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        $artists->guitars()->detach();
-        $artists->delete();
+        $artist->guitars()->detach();
+        $artist->delete();
 
         return redirect()->route('artists.index')->with('success', 'artists deleted successfully');
     }

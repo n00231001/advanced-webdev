@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{__('create new artist')}}
+            {{ __('Edit artist') }}
         </h2>
     </x-slot>
 
@@ -11,11 +11,22 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg mb-4">Edit artist:</h3>
 
-                    <x-guitar-form
-                        :action="route('artists.update', $guitar)"
+
+                    <x-artist-form
+                        :action="route('artists.update', $artist)"
                         :method="'PUT'"
-                        :guitar="$guitar"
+                        :artist="$artist"
+                        :guitars="$guitars"
+                        :artistsGuitars="$artistsGuitars"
                     />
+
+
+
+                    {{-- <x-guitar-form
+                        :action="route('artists.update', $guitars)"
+                        :method="'PUT'"
+                        :guitars="$guitars"
+                    /> --}}
                 </div>
             </div>
         </div>

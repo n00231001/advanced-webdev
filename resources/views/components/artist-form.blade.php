@@ -1,4 +1,4 @@
-@props(['action', 'method', 'artist'])
+@props(['action', 'method', 'artist', 'guitars', 'artistsGuitars'])
 
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -26,7 +26,8 @@
         @enderror
 
         <label for="Colour" class="block text-sm font-medium text-gray-700">Description</label>
-        <input type="text" name="name" id="name" value="{{ old('brand', $artist->description ?? '') }}" required
+        <input type="text" name="description" id="name" value="{{ old('brand', $artist->description ?? '') }}"
+            required
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus-indigo-500 focus: border-indigo-500" />
         @error('name')
             <p class="text-sm text-red-600">{{ $message }}</p>
@@ -40,6 +41,25 @@
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
+
+        <!-- guitars = ALL guitars, not necessarily owned -->
+        <!-- artistsGuitars = ONLY the guitars owned by the artist we're currently editing -->
+        @foreach ($guitars as $guitar)
+
+
+            <!-- first argument of this function = the thing you want to search for -->
+            <!-- second argument = the array to search in -->
+            <!-- so, we want to see if this guitar we're currently looking at inside this array (of ALL guitars) is currently an owned guitar -->
+            <!-- is so, we should show a CHECKED checkbox. otherwise, show an UNCHECKED checkbox -->
+            @if (in_array($guitar->id, $artistsGuitars))
+                <input checked="true" type="checkbox" name="guitars[]" value="{{ $guitar->id }}">
+                <label for="{{ $guitar->id }}">{{ $guitar->brand }} {{ $guitar->type }}</label><br>
+            @else
+                <input type="checkbox" name="guitars[]" value="{{ $guitar->id }}">
+                <label for="{{ $guitar->id }}">{{ $guitar->brand }} {{ $guitar->type }}</label><br>
+            @endif
+        @endforeach
+
     </div>
 
     <div>
