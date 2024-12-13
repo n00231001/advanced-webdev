@@ -7,6 +7,6 @@
         <img src="{{ asset('images/artists/' .$image) }}" alt="{{$name}}" class="w-full max-w-xs h-auto object-cover">
     </div>
 
-    <h3 class="text-gray-800 text-sm italic mb-2" style="font-size: 2rem">Brand</h3>
+    <h3 class="text-gray-800 text-sm italic mb-2" style="font-size: 2rem"></h3>
     <p class="text-gray-700 leading-relaxed">{{ $description}}</p>
 </div>

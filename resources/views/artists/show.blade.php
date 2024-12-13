@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 bg-gradient-to-r from-black-500 bg-gradient-to-r from-orange-800 to-red-500">
         <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -15,8 +15,6 @@
                      :name="$artist->name"
                      :description="$artist->description"
                      />
-
-
                 </div>
             </div>
         </div>

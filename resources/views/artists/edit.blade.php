@@ -22,11 +22,7 @@
 
 
 
-                    {{-- <x-guitar-form
-                        :action="route('artists.update', $guitars)"
-                        :method="'PUT'"
-                        :guitars="$guitars"
-                    /> --}}
+
                 </div>
             </div>
         </div>

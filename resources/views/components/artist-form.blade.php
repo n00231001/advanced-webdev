@@ -1,5 +1,6 @@
 @props(['action', 'method', 'artist', 'guitars', 'artistsGuitars'])
 
+
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if ($method === 'PUT' || $method === 'PATCH')
@@ -51,19 +52,22 @@
             <!-- second argument = the array to search in -->
             <!-- so, we want to see if this guitar we're currently looking at inside this array (of ALL guitars) is currently an owned guitar -->
             <!-- is so, we should show a CHECKED checkbox. otherwise, show an UNCHECKED checkbox -->
-            @if (in_array($guitar->id, $artistsGuitars))
-                <input checked="true" type="checkbox" name="guitars[]" value="{{ $guitar->id }}">
-                <label for="{{ $guitar->id }}">{{ $guitar->brand }} {{ $guitar->type }}</label><br>
-            @else
-                <input type="checkbox" name="guitars[]" value="{{ $guitar->id }}">
-                <label for="{{ $guitar->id }}">{{ $guitar->brand }} {{ $guitar->type }}</label><br>
-            @endif
+
+
+                @if (isset( $artistsGuitars) && in_array($guitar->id, $artistsGuitars))
+                    <input checked="true" type="checkbox" name="guitars[]" value="{{ $guitar->id }}">
+                    <label for="{{ $guitar->id }}">{{ $guitar->brand }} {{ $guitar->type }}</label><br>
+
+                @else
+                    <input type="checkbox" name="guitars[]" value="{{ $guitar->id }}">
+                    <label for="{{ $guitar->id }}">{{ $guitar->brand }} {{ $guitar->type }}</label><br>
+                @endif
         @endforeach
 
     </div>
 
     <div>
-        <x-primary-button>
+        <x-primary-button class="bg-gradient-to-r from-orange-400 bg-gradient-to-r from-cyan-500 to-red-500">
             {{ isset($artist) ? 'updated artist' : 'add artist' }}
         </x-primary-button>
     </div>

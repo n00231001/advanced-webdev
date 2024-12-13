@@ -17,9 +17,9 @@ class GuitarSeeder extends Seeder
     {
         $currentTimeStamp = Carbon::now();
             $guitars = ([
-                ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp , 'created_at' => $currentTimeStamp],
-                ['type' => 'telecaster', 'colour' => 'blue', 'price' => 600, 'brand' => 'fender',  'updated_at' => $currentTimeStamp, 'created_at' => $currentTimeStamp],
-                ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp, 'created_at' => $currentTimeStamp]]
+                ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp , 'created_at' => $currentTimeStamp, 'image' => 'guitar1.jpg'],
+                ['type' => 'telecaster', 'colour' => 'blue', 'price' => 600, 'brand' => 'fender',  'updated_at' => $currentTimeStamp, 'created_at' => $currentTimeStamp, 'image' => 'guitar2.jpg'],
+                ['type' => 'stratocaster', 'colour' => 'red', 'price' => 400, 'brand' => 'fender', 'updated_at' => $currentTimeStamp, 'created_at' => $currentTimeStamp, 'image' => 'guitar3.jpg']]
             );
 
         foreach ($guitars as $guitarData)

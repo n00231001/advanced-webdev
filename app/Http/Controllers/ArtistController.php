@@ -22,11 +22,15 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->role !== 'admin') {
+        /*if (auth()->user()->role !== 'admin') {
             return redirect()->route('guitars.index')->with('error', 'Access denied');
-        }
+        }*/
+
+
+
 
         $guitars = Guitar::all();
+
         return view('artists.create', compact('guitars'));
     }
 
@@ -77,9 +81,9 @@ class ArtistController extends Controller
         $guitars = Guitar::all();
         $artistsGuitars = $artist->guitars->pluck('id')->toArray();
 
-        foreach($artistsGuitars as $guitar){
+        /*foreach($artistsGuitars as $guitar){
             echo $guitar;
-        }
+        }*/
 
         return view('artists.edit', compact('artist', 'guitars', 'artistsGuitars'));
     }

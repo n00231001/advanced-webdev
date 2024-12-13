@@ -14,6 +14,7 @@
                     <x-artist-form
                         :action="route('artists.store')"
                         :method="'POST'"
+                        :guitars="$guitars"
                     />
 
                 </div>
